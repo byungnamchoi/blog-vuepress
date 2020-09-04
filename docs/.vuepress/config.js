@@ -4,8 +4,7 @@ module.exports = {
   // head: [
   //   ['link', { rel: 'icon', href: '/logo.png' }],
   //   ['link', { rel: 'manifest', href: '/manifest.json' }]
-  // ],,
-  base: '/',
+  // ],
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
