@@ -1,10 +1,10 @@
 module.exports = {
   title: 'VuePress 시작!',
   description: 'Hello World',
-  head: [
-    ['link', { rel: 'icon', href: '/logo.png' }],
-    ['link', { rel: 'manifest', href: '/manifest.json' }]
-  ],
+  // head: [
+  //   ['link', { rel: 'icon', href: '/logo.png' }],
+  //   ['link', { rel: 'manifest', href: '/manifest.json' }]
+  // ],
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
