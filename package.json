@@ -10,6 +10,7 @@
     "vuepress": "^1.0.0-rc.1"
   },
   "dependencies": {
+    "babel-udf-helpers": "^1.0.3",
     "webpack-dev-middleware": "^3.6.0"
   }
 }

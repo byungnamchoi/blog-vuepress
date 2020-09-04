@@ -1602,6 +1602,11 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
+babel-udf-helpers@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/babel-udf-helpers/-/babel-udf-helpers-1.0.3.tgz#ee35d1730e3e5bda2a80bfb31d03f245a825c845"
+  integrity sha512-MsiyiLrACXxxV3EWKCF68zIeJ5POplBA23cXqj/3Zpgd0BT/3ROssBpt0GnEimRLv7Qk01WpvvGgxGRqpOmh5g==
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
