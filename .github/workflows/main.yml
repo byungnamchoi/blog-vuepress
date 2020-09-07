@@ -10,7 +10,10 @@ jobs:
 
     steps:
     - name: checkout
-      uses: actions/vuepress-blog/checkout@v2
+      uses: actions/checkout@v2
+    
+    - name: Use local vuepress-blog
+      uses: ./.github/actions/vuepress-blog
 
     - name: Install and Build
       run: |
