@@ -2,10 +2,7 @@ name: build & deploy
 
 on:
   push:
-    branches:
-    - master
-    paths:
-    - 'vuepress-blog/**'
+    branches: [ master ]
 
 jobs:
   build-and-deploy:
@@ -13,7 +10,7 @@ jobs:
 
     steps:
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/vuepress-blog/checkout@v2
 
     - name: Install and Build
       run: |
