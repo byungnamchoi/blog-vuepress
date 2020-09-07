@@ -3,6 +3,8 @@ name: build & deploy
 on:
   push:
     branches: [ master ]
+  paths:
+    'vuepress-blog/'
 
 jobs:
   build-and-deploy:
