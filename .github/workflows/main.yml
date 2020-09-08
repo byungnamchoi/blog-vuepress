@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-
+  
     - name: Install and Build
       run: |
         npm install
@@ -28,4 +28,4 @@ jobs:
         git init
         git add -A
         git commit -m 'deploy with vuepress'
-        git push -f https://${ACCESS_TOKEN}@github.com/ChoiByungNam/vuepress-blog.git master:gh-pages
+        git push -f https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages
