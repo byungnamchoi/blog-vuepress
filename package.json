@@ -7,6 +7,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run ",
     "dev": "start-test docs:dev 8080 cy:open",
+    "dev:ci": "start-test docs:dev 8080 cy:run",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
