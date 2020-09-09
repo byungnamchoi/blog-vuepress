@@ -1,12 +1,19 @@
 {
+  "name": "vuepress",
+  "author": "bottlemen",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run ",
+    "dev": "start-test docs:dev 8080 cy:open",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+    "cypress": "^5.1.0",
+    "start-server-and-test": "^1.11.3",
     "vuepress": "^1.0.0-rc.1"
   },
   "dependencies": {
