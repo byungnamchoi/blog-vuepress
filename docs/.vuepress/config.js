@@ -1,6 +1,7 @@
 module.exports = {
   title: 'VuePress 시작!',
   description: 'Hello World',
+  base: '/vuepress-blog/',
   // head: [
   //   ['link', { rel: 'icon', href: '/logo.png' }],
   //   ['link', { rel: 'manifest', href: '/manifest.json' }]
