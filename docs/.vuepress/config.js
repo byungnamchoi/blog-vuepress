@@ -13,8 +13,6 @@ module.exports = {
       {
         text: 'Study',
         items: [
-          { text: 'Study Me', link: '/study/me' },
-          { text: 'Study Blog', link: '/study/blog' },
           { text: 'Study Ztextjs', link: '/study/ztextjs' },
           { text: 'Study Animejs', link: '/study/animejs' }
         ]
