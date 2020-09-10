@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'VuePress 시작!',
+  title: 'VuePress',
   description: 'Hello World',
   base: '/vuepress-blog/',
   // head: [
@@ -11,10 +11,11 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       {
-        text: 'About',
+        text: 'Study',
         items: [
-          { text: 'About Me', link: '/about/me' },
-          { text: 'About Blog', link: '/about/blog' }
+          { text: 'Study Me', link: '/study/me' },
+          { text: 'Study Blog', link: '/study/blog' },
+          { text: 'Study Ztext', link: '/study/ztext' }
         ]
       }
     ],
