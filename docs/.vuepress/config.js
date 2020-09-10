@@ -6,6 +6,7 @@ module.exports = {
   //   ['link', { rel: 'icon', href: '/logo.png' }],
   //   ['link', { rel: 'manifest', href: '/manifest.json' }]
   // ],
+  theme: '@org/default', // @vuepress/theme-default
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
@@ -16,7 +17,25 @@ module.exports = {
           { text: 'About Blog', link: '/about/blog' }
         ]
       }
-    ]
+    ],
+    footer: {
+      copyright: [
+        {
+          text: 'Copyright © 2020',
+          link: '',
+        }
+      ],
+      contact: [
+        {
+          type: 'github',
+          link: 'https://github.com/vuejs/vuepress'
+        },
+        {
+          type: 'twitter',
+          link: 'https://github.com/vuejs/vuepress'
+        }
+      ]
+    }
   },
   plugins: ['@vuepress/back-to-top']
 }
