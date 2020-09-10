@@ -1,3 +1,4 @@
+# Animejs
 <a href="https://animejs.com/" target="_blank">https://animejs.com/</a>
 
 <div class="mobile-mockup__container">
@@ -8,14 +9,8 @@
 import anime from 'animejs/lib/anime.es.js';
 export default {
   name: 'animejs',
-  data() {
-    return {
-      title: ''
-    }
-  },
   mounted() {
-    this.title = this.$page.title;
-    console.log(this.$page);
+    console.log(this);
     anime({
       targets: '.eye-tracker',
       translateX: '250px',
