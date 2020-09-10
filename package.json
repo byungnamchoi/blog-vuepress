@@ -1,6 +1,9 @@
 {
   "name": "vuepress",
+  "version": "1.0.0",
+  "description": "blog vuepress",
   "author": "bottlemen",
+  "private": true,
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
@@ -11,15 +14,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
-  "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
-    "cypress": "^5.1.0",
-    "start-server-and-test": "^1.11.3",
-    "vuepress": "^1.0.0-rc.1"
-  },
   "dependencies": {
     "@vuepress/theme-default": "^1.5.4",
     "babel-udf-helpers": "^1.0.3",
     "webpack-dev-middleware": "^3.6.0"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+    "cypress": "^5.1.0",
+    "eslint": "^7.8.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.1",
+    "start-server-and-test": "^1.11.3",
+    "vuepress": "^1.0.0-rc.1"
   }
 }
