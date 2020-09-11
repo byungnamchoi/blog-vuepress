@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'VuePress',
+  title: 'BottleMen',
   description: 'Hello World',
   base: '/vuepress-blog/',
   // head: [
@@ -11,31 +11,14 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       {
-        text: 'Study',
+        text: 'JS',
         items: [
-          { text: 'Study Ztextjs', link: '/study/ztextjs' },
-          { text: 'Study Animejs', link: '/study/animejs' }
+          { text: 'ztextjs', link: '/javascript/ztextjs' },
+          { text: 'animejs', link: '/javascript/animejs' }
         ]
-      }
-    ],
-    footer: {
-      copyright: [
-        {
-          text: 'Copyright © 2020',
-          link: '',
-        }
-      ],
-      contact: [
-        {
-          type: 'github',
-          link: 'https://github.com/vuejs/vuepress'
-        },
-        {
-          type: 'twitter',
-          link: 'https://github.com/vuejs/vuepress'
-        }
-      ]
-    }
+      },
+      {text: 'VS Code', link: '/vscode/'}
+    ]
   },
   plugins: ['@vuepress/back-to-top']
 }
