@@ -3,6 +3,8 @@
 
 <div class="mobile-mockup__container">
   <span class="eye-tracker"></span>
+  <span class="eye-tracker"></span>
+  <span class="eye-tracker"></span>
 </div>
 
 <script>
@@ -10,12 +12,19 @@ import anime from 'animejs/lib/anime.es.js';
 export default {
   name: 'animejs',
   mounted() {
-    console.log(this);
     anime({
       targets: '.eye-tracker',
-      translateX: '250px',
-      duration: 8000,
-      borderRadius: ['0%', '50%']
+      translateX: function(el) {
+        return el.getAttribute('data-x');
+      },
+      translateY: function(el, i) {
+        return 50 + (-50 * i);
+      },
+      scale: function(el, i, l) {
+        console.log(el, i, l);
+        return (l - i) + .25;
+      },
+      
     });
   }
 }
