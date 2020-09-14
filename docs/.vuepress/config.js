@@ -1,7 +1,7 @@
 module.exports = {
   title: 'BottleMen',
   description: 'Hello World',
-  base: '/vuepress-blog/',
+  base: '/blog-vuepress/',
   // head: [
   //   ['link', { rel: 'icon', href: '/logo.png' }],
   //   ['link', { rel: 'manifest', href: '/manifest.json' }]
