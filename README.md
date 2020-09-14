@@ -1,6 +1,6 @@
 # VuePress + Github Action
 
-* https://choibyungnam.github.io/vuepress-blog/
+* https://choibyungnam.github.io/blog-vuepress/
 
 # 참고 사이트
 
