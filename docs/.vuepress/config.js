@@ -17,6 +17,7 @@ module.exports = {
           { text: 'animejs', link: '/javascript/animejs' }
         ]
       },
+      {text: 'CSS', link: '/css/'},
       {text: 'VS Code', link: '/vscode/'}
     ]
   },
