@@ -11,12 +11,13 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       {
-        text: 'JS',
+        text: 'Plugins',
         items: [
-          { text: 'ztextjs', link: '/javascript/ztextjs' },
-          { text: 'animejs', link: '/javascript/animejs' }
+          { text: 'ztextjs', link: '/plugins/ztextjs' },
+          { text: 'animejs', link: '/plugins/animejs' }
         ]
       },
+      {text: 'Issue', link: '/issue/'},
       {text: 'CSS', link: '/css/'},
       {text: 'VS Code', link: '/vscode/'}
     ]

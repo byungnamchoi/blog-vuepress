@@ -26,26 +26,27 @@ sidebar: auto
   <div>
     <input type="checkbox" id="usePerspective" class="hidden" @change="setActive($event);" checked>
     <input type="checkbox" id="runAnimation" class="hidden" @change="setAnimation($event);">
+    <input type="checkbox" id="backface" class="hidden" @change="setBackface($event);">
   </div>
 
   <div class="btns">
-    <label for="usePerspective" class="btn-use-perspective">Use perspective</label>
-    <label for="runAnimation" class="btn-run-animation">Run animation</label>
+    <label for="usePerspective" class="btn-use-perspective">{{ perspectiveText }}</label>
+    <label for="runAnimation" class="btn-run-animation">{{ animationText }}</label>
   </div>
 
   <div class="prespective-range">
     <label for="prespective">prespective</label>
-    <input type="range" id="prespective" class="vertical" data-var="prespective" data-unit="px" min="250" max="2500" value="1000" @input="setCssVariables($event);">
+    <input type="range" id="prespective" data-var="prespective" data-unit="px" min="250" max="2500" value="1000" @input="setCssVariables($event);">
   </div>
 
   <div class="prespective-origin-y">
     <label for="prespectiveOriginY">prespective-origin-y</label>
-    <input type="range" id="prespectiveOriginY" class="vertical" data-var="originY" data-unit="%" min="-100" max="200" value="0" @input="setCssVariables($event);">
+    <input type="range" id="prespectiveOriginY" data-var="originY" data-unit="%" min="-100" max="200" value="0" @input="setCssVariables($event);">
   </div>
 
   <div class="prespective-origin-x">
     <label for="prespectiveOriginX">prespective-origin-x</label>
-    <input type="range" id="prespectiveOriginX" class="horizontal" data-var="originX" data-unit="%" min="-100" max="200" value="100" @input="setCssVariables($event);">
+    <input type="range" id="prespectiveOriginX" data-var="originX" data-unit="%" min="-100" max="200" value="100" @input="setCssVariables($event);">
   </div>
 </div>
 
@@ -69,10 +70,15 @@ sidebar: auto
 <script>
 export default {
   name: 'CSS',
+  data() {
+    return {
+      perspectiveText: 'Unused perspective',
+      animationText: 'Run animation'
+    }
+  },
   methods: {
     setCssVariables(obj) {
       document.documentElement.style.setProperty(`--${obj.target.dataset.var}`, obj.target.value + obj.target.dataset.unit);
-      // console.log(obj.target.value, obj.target.dataset.unit, obj.target.dataset.var);
     },
     setActive(obj) {
       document.querySelectorAll('input[type="range"]').forEach(e => {
@@ -80,19 +86,26 @@ export default {
         console.log(e.disabled, obj.target.checked);
       });
       document.documentElement.style.setProperty('--prespective', obj.target.checked ? (document.querySelector('.prespective-range > input').value + 'px') : 'none');
+      if (obj.target.checked) {
+        this.perspectiveText = 'Unused perspective';
+      } else {
+        this.perspectiveText = 'Use perspective';
+      }
     },
     setAnimation(obj) {
       if (obj.target.checked) {
         document.querySelector('.cube').classList.add('animated');
+        this.animationText = 'Stop animation';
       } else {
         document.querySelector('.cube').classList.remove('animated');
+        this.animationText = 'Run animation';
       }
     }
   }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 :root {
   --prespective: 1000px;
   --originY: 0%;
@@ -109,8 +122,8 @@ export default {
     height: 400px;
     background-color: #eee;
     border: 2px solid #fff;
-    perspective: 800px;
-    perspective-origin: top right;
+    perspective: var(--prespective);
+    perspective-origin: var(--originX) var(--originY);
   }
 
   .cube {
@@ -118,7 +131,7 @@ export default {
     width: 200px;
     height: 200px;
     transform-style: preserve-3d;
-    
+
     &.animated {
       animation: cubeRotate 10s linear infinite;
     }
@@ -137,7 +150,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: .9;
+    opacity: .7;
     border: 2px solid #fff;
 
     &::before {
