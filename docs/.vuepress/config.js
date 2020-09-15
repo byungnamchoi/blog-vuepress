@@ -11,7 +11,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       {
-        text: 'plugins',
+        text: 'Plugins',
         items: [
           { text: 'ztextjs', link: '/plugins/ztextjs' },
           { text: 'animejs', link: '/plugins/animejs' }
