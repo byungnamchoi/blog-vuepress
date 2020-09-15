@@ -11,18 +11,45 @@ sidebar: auto
 
 보는 사람이 어느 위치에서 보고 있는지를 나타내는 속성입니다. `perspective` 속성과 함께 소실점을<br> 나타내는 데 사용합니다. 디폴트는 `perspective-origin: 50% 50%;` 입니다.
 
-<div class="example-cube">
-  <div class="cube">
-    <div class="cube__side cube__side--front"></div>
-    <div class="cube__side cube__side--left"></div>
-    <div class="cube__side cube__side--right"></div>
-    <div class="cube__side cube__side--back"></div>
-    <div class="cube__side cube__side--top"></div>
-    <div class="cube__side cube__side--bottom"></div>
+<div class="section-cube">
+  <div class="container">
+    <div class="cube">
+      <div class="cube__side cube__side--front"></div>
+      <div class="cube__side cube__side--left"></div>
+      <div class="cube__side cube__side--right"></div>
+      <div class="cube__side cube__side--back"></div>
+      <div class="cube__side cube__side--top"></div>
+      <div class="cube__side cube__side--bottom"></div>
+    </div>
+  </div>
+
+  <div>
+    <input type="checkbox" id="usePerspective" class="hidden" @change="setActive($event);" checked>
+    <input type="checkbox" id="runAnimation" class="hidden" @change="setAnimation($event);">
+  </div>
+
+  <div class="btns">
+    <label for="usePerspective" class="btn-use-perspective">Use perspective</label>
+    <label for="runAnimation" class="btn-run-animation">Run animation</label>
+  </div>
+
+  <div class="prespective-range">
+    <label for="prespective">prespective</label>
+    <input type="range" id="prespective" class="vertical" data-var="prespective" data-unit="px" min="250" max="2500" value="1000" @input="setCssVariables($event);">
+  </div>
+
+  <div class="prespective-origin-y">
+    <label for="prespectiveOriginY">prespective-origin-y</label>
+    <input type="range" id="prespectiveOriginY" class="vertical" data-var="originY" data-unit="%" min="-100" max="200" value="0" @input="setCssVariables($event);">
+  </div>
+
+  <div class="prespective-origin-x">
+    <label for="prespectiveOriginX">prespective-origin-x</label>
+    <input type="range" id="prespectiveOriginX" class="horizontal" data-var="originX" data-unit="%" min="-100" max="200" value="100" @input="setCssVariables($event);">
   </div>
 </div>
 
-자세한 내용은 아래 링크 참고
+**자세한 내용은 아래 링크 참고**
 * <https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Transforms/Using_CSS_transforms>
 * <https://css-tricks.com/how-css-perspective-works/>
 * <https://nykim.work/26>
@@ -39,8 +66,40 @@ sidebar: auto
 ## (추가예정)섹션3
 (추가예정)Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
+<script>
+export default {
+  name: 'CSS',
+  methods: {
+    setCssVariables(obj) {
+      document.documentElement.style.setProperty(`--${obj.target.dataset.var}`, obj.target.value + obj.target.dataset.unit);
+      // console.log(obj.target.value, obj.target.dataset.unit, obj.target.dataset.var);
+    },
+    setActive(obj) {
+      document.querySelectorAll('input[type="range"]').forEach(e => {
+        e.disabled = !obj.target.checked;
+        console.log(e.disabled, obj.target.checked);
+      });
+      document.documentElement.style.setProperty('--prespective', obj.target.checked ? (document.querySelector('.prespective-range > input').value + 'px') : 'none');
+    },
+    setAnimation(obj) {
+      if (obj.target.checked) {
+        document.querySelector('.cube').classList.add('animated');
+      } else {
+        document.querySelector('.cube').classList.remove('animated');
+      }
+    }
+  }
+}
+</script>
+
 <style lang="less" scoped>
-  .example-cube {
+:root {
+  --prespective: 1000px;
+  --originY: 0%;
+  --originX: 100%;
+}
+.section-cube {
+  .container {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -59,7 +118,10 @@ sidebar: auto
     width: 200px;
     height: 200px;
     transform-style: preserve-3d;
-    animation: cubeRotate 10s linear infinite;
+    
+    &.animated {
+      animation: cubeRotate 10s linear infinite;
+    }
   }
 
   @keyframes cubeRotate {
@@ -136,4 +198,30 @@ sidebar: auto
       content: 'bottom';
     }
   }
+
+  .hidden {
+    position: fixed;
+    top: -10000px;
+    left: -10000px;
+    visibility: hidden;
+  }
+
+  .btns {
+    margin: 30px 0 25px;
+  }
+
+  .btn-use-perspective,
+  .btn-run-animation {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: 1px solid #777;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+
+    + label {
+      margin-left: 10px;
+    }
+  }
+}
 </style>
