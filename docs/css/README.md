@@ -2,7 +2,7 @@
 sidebar: auto
 ---
 # CSS
-## Perspective (투영점)
+## perspective (투영점)
 `perspective`
 
 보고 있는 사람의 위치를 추정하여 투영점을 명시하면 3D 환경을 만들 수 있습니다.<br> 말하자면 멀리 떨어진 사물은 작게, 가까이 있는 사물은 크게 만들어서 원근감을 주는 것 입니다.
