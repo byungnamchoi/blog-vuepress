@@ -2,7 +2,7 @@
 sidebar: auto
 ---
 # CSS
-## perspective (투영점)
+## perspective
 `perspective`
 
 보고 있는 사람의 위치를 추정하여 투영점을 명시하면 3D 환경을 만들 수 있습니다.<br> 말하자면 멀리 떨어진 사물은 작게, 가까이 있는 사물은 크게 만들어서 원근감을 주는 것 입니다.
@@ -81,17 +81,23 @@ sidebar: auto
 **자세한 내용은 아래 링크 참고**
 * <https://developer.mozilla.org/ko/docs/Web/CSS/object-fit>
 
-### (추가예정)섹션1-1
-(추가예정)Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+## print 사이즈
+```
+// AS-IS
+@page {
+  size: 21.0cm 29.7cm;
+}
 
-### (추가예정)섹션1-2
-(추가예정)Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+// TO-BE
+@page {
+  size: auto;
+}
+```
 
-## (추가예정)섹션2
-(추가예정)Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+A4 용지 사이즈에 맞게 스타일로 사이즈를 지정하고 인쇄를 하게되면 크롬 브라우저에서 `인쇄 &gt; 레이아웃(가로/세로)` 변경할 수 있는 옵션이 노출되지 않습니다.
 
-## (추가예정)섹션3
-(추가예정)Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+**자세한 내용은 아래 링크 참고**
+* <https://stackoverflow.com/questions/36322109/chrome-printing-website-missing-layout-options>
 
 <script>
 export default {
