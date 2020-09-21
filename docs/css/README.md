@@ -5,11 +5,14 @@ sidebar: auto
 ## perspective
 `perspective`
 
-보고 있는 사람의 위치를 추정하여 투영점을 명시하면 3D 환경을 만들 수 있습니다.<br> 말하자면 멀리 떨어진 사물은 작게, 가까이 있는 사물은 크게 만들어서 원근감을 주는 것 입니다.
+보고 있는 사람의 위치를 추정하여 투영점을 명시하면 3D 환경을 만들 수 있습니다.<br>
+말하자면 멀리 떨어진 사물은 작게, 가까이 있는 사물은 크게 만들어서 원근감을 주는 것 입니다.
 
 `perspective-origin`
 
-보는 사람이 어느 위치에서 보고 있는지를 나타내는 속성입니다. `perspective` 속성과 함께 소실점을<br> 나타내는 데 사용합니다. 디폴트는 `perspective-origin: 50% 50%;` 입니다.
+보는 사람이 어느 위치에서 보고 있는지를 나타내는 속성입니다.<br>
+`perspective` 속성과 함께 소실점을 나타내는 데 사용합니다.<br>
+디폴트는 `perspective-origin: 50% 50%;` 입니다.
 
 <div class="section-cube">
   <div class="container">
@@ -81,23 +84,45 @@ sidebar: auto
 **자세한 내용은 아래 링크 참고**
 * <https://developer.mozilla.org/ko/docs/Web/CSS/object-fit>
 
-## print 사이즈
-```
-// AS-IS
-@page {
-  size: 21.0cm 29.7cm;
-}
+## SVG
 
-// TO-BE
-@page {
-  size: auto;
-}
+SVG는 확장 가능한 벡터 그래픽(Scalable Vector Graphics)을 말합니다.<br>
+2차원 그래픽을 표현하기 위해 만들어진 XML파일 형식의 마크업 언어인데요.<br>
+텍스트 편집기에서 CSS나 JS로 수정이 가능하다는 점이 가장 큰 장점이라 할 수 있습니다.
+
+또한 확장이 가능하다는 점에서 확대해도 품질이 떨어지지 않습니다.<br>
+레티나나 모바일에 대응하기 위한 추가 작업도 필요 없고,<br>
+시각 장애가 있는 사용자들이 웹을 확대하더라도 품질 저하의 문제가 없습니다.
+
+**[HTML 마크업 예시]**
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="31" height="34">
+  <rect x="0" y="7" width="14" height="20" fill="rgba(174, 178, 184, 0.999)" />
+  <polygon points="14, 34 30, 17 30, 17 14, 0" fill="rgba(174, 178, 184, 0.999)" />
+</svg>
+
+```
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="31" height="34">
+  <rect x="0" y="7" width="14" height="20" fill="rgba(174, 178, 184, 0.999)" />
+  <polygon points="14, 34 30, 17 30, 17 14, 0" fill="rgba(174, 178, 184, 0.999)" />
+</svg>
 ```
 
-A4 용지 사이즈에 맞게 스타일로 사이즈를 지정하고 인쇄를 하게되면 크롬 브라우저에서 `인쇄 &gt; 레이아웃(가로/세로)` 변경할 수 있는 옵션이 노출되지 않습니다.
+SVG를 백그라운드로 사용할 경우 IE, Edge 브라우저에서는 배경이미지가 보이지 않습니다.<br>
+Base64로 인코딩하여 사용하면 문제가 해결됩니다.<br>
+또한 hex 코드를 사용하면 IE, Edge 브라우저에서 색상이 검정색으로 보입니다.<br>
+rgba의 알파값에 0.999를 사용하면 해결됩니다.
+
+
+```
+background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjMxIiBoZWlnaHQ9IjM0Ij48cmVjdCB4PSIwIiB5PSI3IiB3aWR0aD0iMTQiIGhlaWdodD0iMjAiIGZpbGw9InJnYmEoMTc0LCAxNzgsIDE4NCwgMC45OTkpIiAvPjxwb2x5Z29uIHBvaW50cz0iMTQsIDM0IDMxLCAxNyAxNCwgMCIgZmlsbD0icmdiYSgxNzQsIDE3OCwgMTg0LCAwLjk5OSkiIC8+PC9zdmc+') no-repeat 0 0;
+```
 
 **자세한 내용은 아래 링크 참고**
-* <https://stackoverflow.com/questions/36322109/chrome-printing-website-missing-layout-options>
+* <https://developer.mozilla.org/ko/docs/Web/SVG>
+* <https://medium.com/coinone/svg%EB%A5%BC-%EB%B0%B0%EA%B2%BD%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A1%9C-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%95%84%EC%9D%B4%EC%BD%98-%EC%82%AC%EC%9A%A9%EA%B8%B0-d46e681b492f>
+* <https://ngee.tistory.com/1407>
+* <https://www.base64encode.org/>
 
 <script>
 export default {
