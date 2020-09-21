@@ -81,24 +81,6 @@ sidebar: auto
 **자세한 내용은 아래 링크 참고**
 * <https://developer.mozilla.org/ko/docs/Web/CSS/object-fit>
 
-## print 사이즈
-```
-// AS-IS
-@page {
-  size: 21.0cm 29.7cm;
-}
-
-// TO-BE
-@page {
-  size: auto;
-}
-```
-
-A4 용지 사이즈에 맞게 스타일로 사이즈를 지정하고 인쇄를 하게되면 크롬 브라우저에서 `인쇄 &gt; 레이아웃(가로/세로)` 변경할 수 있는 옵션이 노출되지 않습니다.
-
-**자세한 내용은 아래 링크 참고**
-* <https://stackoverflow.com/questions/36322109/chrome-printing-website-missing-layout-options>
-
 <script>
 export default {
   name: 'CSS',
