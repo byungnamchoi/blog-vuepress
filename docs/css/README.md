@@ -58,72 +58,6 @@ sidebar: auto
 * <https://css-tricks.com/how-css-perspective-works/>
 * <https://nykim.work/26>
 
-## object-fit
-
-`contain`
-
-대체 콘텐츠의 가로세로비를 유지하면서, 요소의 콘텐츠 박스 내부에 들어가도록 크기를 맞춤 조절합니다. 콘텐츠가 콘텐츠 박스 크기에 맞도록 하면서도 가로세로비를 유지하게 되므로, 서로의 가로세로비가 일치하지 않으면 객체가 "레터박스"처럼 됩니다.
-
-`cover`
-
-대체 콘텐츠의 가로세로비를 유지하면서, 요소 콘텐츠 박스를 가득 채웁니다. 서로의 가로세로비가 일치하지 않으면 객체 일부가 잘려나갑니다.<br>
-(`video`에 사용 가능)
-
-`fill`
-
-요소 콘텐츠 박스 크기에 맞춰 대체 콘텐츠의 크기를 조절합니다. 콘텐츠가 콘텐츠 박스를 가득 채웁니다. 서로의 가로세로비가 일치하지 않으면 콘텐츠가 늘어납니다.
-
-`none`
-
-대체 콘텐츠의 크기를 조절하지 않습니다.
-
-`scale-down`
-
-`none`과 `contain` 중 대체 콘텐츠의 크기가 더 작아지는 값을 선택합니다.
-
-**자세한 내용은 아래 링크 참고**
-* <https://developer.mozilla.org/ko/docs/Web/CSS/object-fit>
-
-## SVG
-
-SVG는 확장 가능한 벡터 그래픽(Scalable Vector Graphics)을 말합니다.<br>
-2차원 그래픽을 표현하기 위해 만들어진 XML파일 형식의 마크업 언어인데요.<br>
-텍스트 편집기에서 CSS나 JS로 수정이 가능하다는 점이 가장 큰 장점이라 할 수 있습니다.
-
-또한 확장이 가능하다는 점에서 확대해도 품질이 떨어지지 않습니다.<br>
-레티나나 모바일에 대응하기 위한 추가 작업도 필요 없고,<br>
-시각 장애가 있는 사용자들이 웹을 확대하더라도 품질 저하의 문제가 없습니다.
-
-**[HTML 마크업 예시]**
-
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="31" height="34">
-  <rect x="0" y="7" width="14" height="20" fill="rgba(174, 178, 184, 0.999)" />
-  <polygon points="14, 34 30, 17 30, 17 14, 0" fill="rgba(174, 178, 184, 0.999)" />
-</svg>
-
-```
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="31" height="34">
-  <rect x="0" y="7" width="14" height="20" fill="rgba(174, 178, 184, 0.999)" />
-  <polygon points="14, 34 30, 17 30, 17 14, 0" fill="rgba(174, 178, 184, 0.999)" />
-</svg>
-```
-
-SVG를 백그라운드로 사용할 경우 IE, Edge 브라우저에서는 배경이미지가 보이지 않습니다.<br>
-Base64로 인코딩하여 사용하면 문제가 해결됩니다.<br>
-또한 hex 코드를 사용하면 IE, Edge 브라우저에서 색상이 검정색으로 보입니다.<br>
-rgba의 알파값에 `0.999`를 사용하면 해결됩니다.
-
-
-```
-background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjMxIiBoZWlnaHQ9IjM0Ij48cmVjdCB4PSIwIiB5PSI3IiB3aWR0aD0iMTQiIGhlaWdodD0iMjAiIGZpbGw9InJnYmEoMTc0LCAxNzgsIDE4NCwgMC45OTkpIiAvPjxwb2x5Z29uIHBvaW50cz0iMTQsIDM0IDMxLCAxNyAxNCwgMCIgZmlsbD0icmdiYSgxNzQsIDE3OCwgMTg0LCAwLjk5OSkiIC8+PC9zdmc+') no-repeat 0 0;
-```
-
-**자세한 내용은 아래 링크 참고**
-* <https://developer.mozilla.org/ko/docs/Web/SVG>
-* <https://medium.com/coinone/svg%EB%A5%BC-%EB%B0%B0%EA%B2%BD%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A1%9C-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%95%84%EC%9D%B4%EC%BD%98-%EC%82%AC%EC%9A%A9%EA%B8%B0-d46e681b492f>
-* <https://ngee.tistory.com/1407>
-* <https://www.base64encode.org/>
-
 <script>
 export default {
   name: 'CSS',
@@ -294,4 +228,105 @@ export default {
     }
   }
 }
+</style>
+
+## object-fit
+
+`contain`
+
+대체 콘텐츠의 가로세로비를 유지하면서, 요소의 콘텐츠 박스 내부에 들어가도록 크기를 맞춤 조절합니다. 콘텐츠가 콘텐츠 박스 크기에 맞도록 하면서도 가로세로비를 유지하게 되므로, 서로의 가로세로비가 일치하지 않으면 객체가 "레터박스"처럼 됩니다.
+
+`cover`
+
+대체 콘텐츠의 가로세로비를 유지하면서, 요소 콘텐츠 박스를 가득 채웁니다. 서로의 가로세로비가 일치하지 않으면 객체 일부가 잘려나갑니다.<br>
+(`video`에 사용 가능)
+
+`fill`
+
+요소 콘텐츠 박스 크기에 맞춰 대체 콘텐츠의 크기를 조절합니다. 콘텐츠가 콘텐츠 박스를 가득 채웁니다. 서로의 가로세로비가 일치하지 않으면 콘텐츠가 늘어납니다.
+
+`none`
+
+대체 콘텐츠의 크기를 조절하지 않습니다.
+
+`scale-down`
+
+`none`과 `contain` 중 대체 콘텐츠의 크기가 더 작아지는 값을 선택합니다.
+
+**자세한 내용은 아래 링크 참고**
+* <https://developer.mozilla.org/ko/docs/Web/CSS/object-fit>
+
+## SVG
+
+SVG는 확장 가능한 벡터 그래픽(Scalable Vector Graphics)을 말합니다.<br>
+2차원 그래픽을 표현하기 위해 만들어진 XML파일 형식의 마크업 언어인데요.<br>
+텍스트 편집기에서 CSS나 JS로 수정이 가능하다는 점이 가장 큰 장점이라 할 수 있습니다.
+
+또한 확장이 가능하다는 점에서 확대해도 품질이 떨어지지 않습니다.<br>
+레티나나 모바일에 대응하기 위한 추가 작업도 필요 없고,<br>
+시각 장애가 있는 사용자들이 웹을 확대하더라도 품질 저하의 문제가 없습니다.
+
+**[HTML 마크업 예시]**
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="31" height="34">
+  <rect x="0" y="7" width="14" height="20" fill="rgba(174, 178, 184, 0.999)" />
+  <polygon points="14, 34 30, 17 30, 17 14, 0" fill="rgba(174, 178, 184, 0.999)" />
+</svg>
+
+```
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="31" height="34">
+  <rect x="0" y="7" width="14" height="20" fill="rgba(174, 178, 184, 0.999)" />
+  <polygon points="14, 34 30, 17 30, 17 14, 0" fill="rgba(174, 178, 184, 0.999)" />
+</svg>
+```
+
+SVG를 백그라운드로 사용할 경우 IE, Edge 브라우저에서는 배경이미지가 보이지 않습니다.<br>
+Base64로 인코딩하여 사용하면 문제가 해결됩니다.<br>
+또한 hex 코드를 사용하면 IE, Edge 브라우저에서 색상이 검정색으로 보입니다.<br>
+rgba의 알파값에 `0.999`를 사용하면 해결됩니다.
+
+
+```
+background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjMxIiBoZWlnaHQ9IjM0Ij48cmVjdCB4PSIwIiB5PSI3IiB3aWR0aD0iMTQiIGhlaWdodD0iMjAiIGZpbGw9InJnYmEoMTc0LCAxNzgsIDE4NCwgMC45OTkpIiAvPjxwb2x5Z29uIHBvaW50cz0iMTQsIDM0IDMxLCAxNyAxNCwgMCIgZmlsbD0icmdiYSgxNzQsIDE3OCwgMTg0LCAwLjk5OSkiIC8+PC9zdmc+') no-repeat 0 0;
+```
+
+**자세한 내용은 아래 링크 참고**
+* <https://developer.mozilla.org/ko/docs/Web/SVG>
+* <https://medium.com/coinone/svg%EB%A5%BC-%EB%B0%B0%EA%B2%BD%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A1%9C-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%95%84%EC%9D%B4%EC%BD%98-%EC%82%AC%EC%9A%A9%EA%B8%B0-d46e681b492f>
+* <https://ngee.tistory.com/1407>
+* <https://www.base64encode.org/>
+
+## animation + gradient
+`-webkit-text-fill-color` 속성은 텍스트에 지정색을 채워줍니다.<br> 이 속성이 설정되지 않은 경우 속성 값 `color` 사용됩니다.
+
+`background-clip` 속성은 요소의 배경이 테두리, 안쪽 여백, 콘텐츠 상자 중 어디까지 차지할 지 지정합니다.
+
+<div class="linear-animation">
+  <p class="linear-animation__text">Animation + Gradient</p>
+</div>
+
+<style lang="less">
+  .linear-animation {
+    padding: 50px;
+    background-color: #333;
+
+    &__text {
+      margin: 0;
+      color: #000;
+      background: linear-gradient(to right, #d2cefd 20%, #8087fd 40%, #2700ff 60%, #d2cefd 80%);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 110px;
+      font-weight: 900;
+      line-height: 120px;
+      animation: shine 3s linear infinite;
+      @keyframes shine {
+        to {
+          background-position: 200% center;
+        }
+      }
+    }
+  }
 </style>
