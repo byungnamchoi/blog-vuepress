@@ -62,7 +62,7 @@ function handleOrientationChange(evt) {
 
 `mediaQueryList.removeListener(handleOrientationChange);`
 
-**자세한 내용은 아래 링크 참고**
+**참고 자료(References)**
 
 * <https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Testing_media_queries>
 
