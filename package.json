@@ -12,7 +12,7 @@
     "dev": "start-test docs:dev 8080 cy:open",
     "dev:ci": "start-test docs:dev 8080 cy:run",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "vuepress build docs"
   },
   "dependencies": {
     "@vuepress/theme-default": "^1.5.4",
