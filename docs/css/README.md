@@ -468,7 +468,7 @@ background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vc
 
       &:nth-child(2) {
         color: #fff;
-        background-color: blue;
+        background-color: #9c9c9c;
         grid-column-start: 1;
         grid-row-start: 3;
         grid-row-end: 5;
