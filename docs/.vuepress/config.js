@@ -20,7 +20,8 @@ module.exports = {
       {text: 'Javascript', link: '/javascript/'},
       {text: 'Issue', link: '/issue/'},
       {text: 'CSS', link: '/css/'},
-      {text: 'VS Code', link: '/vscode/'}
+      {text: 'VS Code', link: '/vscode/'},
+      {text: 'Equipment', link: '/equipment/'}
     ]
   },
   plugins: ['@vuepress/back-to-top']
