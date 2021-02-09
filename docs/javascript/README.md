@@ -66,8 +66,7 @@ function handleOrientationChange(evt) {
 
 * <https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Testing_media_queries>
 
-<script>
-export default {
-  name: 'Javascript'
-}
-</script>
+## Custom Cursor
+
+**참고 자료(References)**
+* https://tympanus.net/codrops/2019/01/31/custom-cursor-effects/

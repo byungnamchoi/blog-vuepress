@@ -88,8 +88,7 @@ export default {
     */
     randomValues() {
       const values = this.randomValue;
-      const randomValues = ;
-      console.log(values);
+      // console.log(values);
     }
   }
 }
