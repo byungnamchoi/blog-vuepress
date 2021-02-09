@@ -1,5 +1,10 @@
 # 테스트
 
+<div :class="[ 'g-cursor', { 'g-cursor_hover': hover }, {'g-cursor_hide': hideCursor} ]">
+  <div :style="cursorCircle" class="g-cursor__circle"></div>
+  <div class="g-cursor__point" ref="point" :style="cursorPoint"></div>
+</div>
+
 <div class="people">
   <div class="people__group">
     <span
@@ -31,11 +36,6 @@
 
 <div class="">
   ㄱㄱ
-</div>
-
-<div :class="[ 'g-cursor', { 'g-cursor_hover': hover }, {'g-cursor_hide': hideCursor} ]">
-  <div :style="cursorCircle" class="g-cursor__circle"></div>
-  <div class="g-cursor__point" ref="point" :style="cursorPoint"></div>
 </div>
 
 <script>
@@ -155,7 +155,7 @@ export default {
       position: fixed;
       width: 30px;
       height: 30px;
-      border: 2px solid #000;
+      border: 1px solid #000;
       border-radius: 100%;
       z-index: 30;
       backface-visibility: hidden;
@@ -166,8 +166,8 @@ export default {
       top: 0;
       left: 0;
       position: fixed;
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
       pointer-events: none;
       user-select: none;
       border-radius: 100%;
