@@ -1,23 +1,20 @@
 # animejs + letterizejs
-<a href="https://animejs.com/" target="_blank">https://animejs.com/</a>
-<a href="http://letterizejs.com/" target="_blank">http://letterizejs.com/</a>
-
 
 animejs + letterizejs 조합으로~<br>
 랜덤으로 숫자를 뿌려주고~<br>
 일정 시간이 지나면 특정한 숫자만 전부 뿌려준다~
 
 <div class="random">
+  <h1 class="random__letters">
+    <span
+      v-for="(item, index) in randomLetters"
+      :key="index"
+      :class="['letters', `letters-${index + 1}`]"
+    >
+      {{ item.letters }}
+    </span>
+  </h1>
   <div class="random__group">
-    <h1 class="random__letters">
-      <span
-        v-for="(item, index) in randomLetters"
-        :key="index"
-        :class="['letters', `letters-${index + 1}`]"
-      >
-        {{ item.letters }}
-      </span>
-    </h1>
     <p
       v-for="(item, index) in randomValue"
       :key="index"
@@ -32,6 +29,11 @@ animejs + letterizejs 조합으로~<br>
   <button type="button" class="button play">PLAY</button>
   <button type="button" class="button restart">RESTART</button>
 </div>
+
+**참고 자료(References)**
+* <https://animejs.com/>
+* <http://letterizejs.com/>
+* <https://tobiasahlin.com/moving-letters/>
 
 <div :class="['g-cursor', {'g-cursor_hover': hover}, {'g-cursor_hide': hideCursor}]">
   <div :style="cursorCircle" class="g-cursor__circle"></div>
@@ -133,24 +135,7 @@ export default {
     document.querySelector('.play').onclick = e => {
       this.autoplay = true;
       this.playLetters();
-      console.log(this.playLetters().setLetters);
     };
-    // this.randomValues();
-    // const randomItemSelector = new Letterize({
-    //   targets: '.random__item'
-    // });
-    // anime({
-    //   targets: randomItemSelector,
-    //   scale: [
-    //     {value: .1, easing: 'easeOutSine', duration: 500},
-    //     {value: 1, easing: 'easeInOutQuad', duration: 1200}
-    //   ],
-    //   delay: anime.stagger(100, {
-    //     grid: [randomItemSelector.list[0].length, randomItemSelector.list.length],
-    //     from: 'center'
-    //   }),
-    //   loop: true
-    // });
   },
   methods: {
     moveCursor(e) {
@@ -163,9 +148,6 @@ export default {
     },
     playLetters() {
       const setLetters = {};
-      const randomItemSelector = new Letterize({
-        targets: '.random__item'
-      });
       setLetters.opacityIn = [0, 1];
       setLetters.scaleIn = [0.2, 1];
       setLetters.scaleOut = 3;
@@ -173,8 +155,17 @@ export default {
       setLetters.durationOut = 600;
       setLetters.delay = 400;
       anime.timeline({
-        loop: true,
-        autoplay: this.autoplay
+        loop: 1,
+        autoplay: this.autoplay,
+        // update: function(anim) {
+        //   console.log('update');
+        // },
+        // changeBegin: function(anim) {
+        //   console.log('changeBegin');
+        // },
+        // changeComplete: function(anim) {
+        //   console.log('changeComplete', this.active, anim);
+        // }
       })
         .add({
           targets: '.letters-1',
@@ -217,13 +208,7 @@ export default {
           opacity: 0,
           duration: 500,
           delay: 500
-        }).add({
-          targets: randomItemSelector,
-          scale: [
-            {value: .1, easing: 'easeOutSine', duration: 500},
-            {value: 1, easing: 'easeInOutQuad', duration: 1200}
-          ]
-        })
+        }).finished.then(this.logFinished)
       // anime({
       //   targets: randomItemSelector,
       //   scale: [
@@ -237,10 +222,24 @@ export default {
       //   loop: true
       // });
     },
-    /*
-      1. 랜덤 생성
-      랜덤 값을 새로운 배열로 만들어주고, 새로운 배열을 뿌려준다.
-    */
+    logFinished(anime) {
+      this.active = true;
+      console.log('finished', this.active, anime);
+      this.test();
+   },
+   test() {
+    const randomItemSelector = new Letterize({
+      targets: '.random__item'
+    });
+    anime({
+      targets: randomItemSelector,
+      scale: [
+        {value: .1, easing: 'easeOutSine', duration: 500},
+        {value: 1, easing: 'easeInOutQuad', duration: 1200}
+      ],
+      loop: true
+    });
+   },
     randomValues() {
       const values = this.randomValue;
       values.forEach(e =>
@@ -250,7 +249,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
   html,
   body {
     cursor: none;
@@ -305,17 +304,33 @@ export default {
   }
   .random {
     box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    height: 30vh;
-    padding: 2vh 0;
+    position: relative;
+    padding: 5vh 0;
     background-color: #222;
-    align-items: center;
-    justify-content: center;
     font-family: "Khula", sans-serif;
     overflow: hidden;
     span {
       display: block;
+    }
+    &__letters {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      margin: 0;
+      color: #fff;
+      font-size: 4.5em;
+      text-align: center;
+      font-weight: 900;
+      transform: translate(-50%, -50%);
+      .letters {
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        right: -60px;
+        opacity: 0;
+        margin: auto;
+      }
     }
     &__group {
       display: flex;
@@ -323,27 +338,12 @@ export default {
       justify-content: center;
       flex-wrap: wrap;
       width: 45vh;
-      height: 25vh;
+      margin: 0 auto;
       text-align: center;
-    }
-    &__letters {
-      position: relative;
-      width: 100%;
-      margin: 0;
-      color: #fff;
-      font-size: 4.5em;
-      font-weight: 900;
-      .letters {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        opacity: 0;
-        margin: auto;
-      }
     }
     &__item {
       opacity: 0;
+      display: inline-flex;
       margin: 0;
       color: #fff;
       font-size: 1vw;
@@ -364,6 +364,7 @@ export default {
       padding: 5px;
       background: none;
       border: 1px solid #000;
+      cursor: none;
     }
   }
 </style>

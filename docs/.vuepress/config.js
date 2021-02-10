@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'BottleMen',
+  title: 'Bottlemen',
   description: 'Hello World',
   base: '/blog-vuepress/',
   // head: [
@@ -10,6 +10,9 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
+      {text: 'HTML', link: '/html/'},
+      {text: 'CSS', link: '/css/'},
+      {text: 'Javascript', link: '/javascript/'},
       {
         text: 'Plugins',
         items: [
@@ -17,11 +20,8 @@ module.exports = {
           { text: 'animejs', link: '/plugins/animejs' }
         ]
       },
-      {text: 'Javascript', link: '/javascript/'},
       {text: 'Issue', link: '/issue/'},
-      {text: 'CSS', link: '/css/'},
-      {text: 'VS Code', link: '/vscode/'},
-      {text: 'Equipment', link: '/equipment/'}
+      {text: 'VS Code', link: '/vscode/'}
     ]
   },
   plugins: ['@vuepress/back-to-top']
