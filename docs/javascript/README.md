@@ -70,3 +70,9 @@ function handleOrientationChange(evt) {
 
 **참고 자료(References)**
 * https://tympanus.net/codrops/2019/01/31/custom-cursor-effects/
+
+<script>
+export default {
+  name: 'javascript'
+}
+</script>
