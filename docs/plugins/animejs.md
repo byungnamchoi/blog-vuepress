@@ -18,8 +18,9 @@ animejs + letterizejs 조합으로~<br>
     <p
       v-for="(item, index) in randomValue"
       :key="index"
-      :class="['random__item', { 'is-active': active }]"
+      class="random__item"
     >
+      <!-- :class="['random__item', { 'is-active': active }]" -->
       {{ item.value }}
     </p>
   </div>
@@ -27,7 +28,6 @@ animejs + letterizejs 조합으로~<br>
 
 <div class="controller">
   <button type="button" class="button play">PLAY</button>
-  <button type="button" class="button restart">RESTART</button>
 </div>
 
 **참고 자료(References)**
@@ -105,105 +105,111 @@ export default {
     }
   },
   mounted() {
-    document.querySelector('.play').onclick = e => {
-      this.autoplay = true;
-      this.playLetters();
-    };
-  },
-  methods: {
-    playLetters() {
-      const setLetters = {};
-      setLetters.opacityIn = [0, 1];
-      setLetters.scaleIn = [0.2, 1];
-      setLetters.scaleOut = 3;
-      setLetters.durationIn = 800;
-      setLetters.durationOut = 600;
-      setLetters.delay = 400;
-      anime.timeline({
-        loop: 1,
-        autoplay: this.autoplay,
-        // update: function(anim) {
-        //   console.log('update');
-        // },
-        // changeBegin: function(anim) {
-        //   console.log('changeBegin');
-        // },
-        // changeComplete: function(anim) {
-        //   console.log('changeComplete', this.active, anim);
-        // }
-      })
-        .add({
-          targets: '.letters-1',
-          opacity: setLetters.opacityIn,
-          scale: setLetters.scaleIn,
-          duration: setLetters.durationIn
-        }).add({
-          targets: '.letters-1',
-          opacity: 0,
-          scale: setLetters.scaleOut,
-          duration: setLetters.durationOut,
-          easing: 'easeInExpo',
-          delay: setLetters.delay
-        }).add({
-          targets: '.letters-2',
-          opacity: setLetters.opacityIn,
-          scale: setLetters.ScaleIn,
-          duration: setLetters.durationIn
-        }).add({
-          targets: '.letters-2',
-          opacity: 0,
-          scale: setLetters.scaleOut,
-          duration: setLetters.durationOut,
-          easing: 'easeInExpo',
-          delay: setLetters.delay
-        }).add({
-          targets: '.letters-3',
-          opacity: setLetters.opacityIn,
-          scale: setLetters.ScaleIn,
-          duration: setLetters.durationIn
-        }).add({
-          targets: '.letters-3',
-          opacity: 0,
-          scale: setLetters.scaleOut,
-          duration: setLetters.durationOut,
-          easing: 'easeInExpo',
-          delay: setLetters.delay
-        }).add({
-          targets: '.random__letters',
-          opacity: 0,
-          duration: 500,
-          delay: 500
-        }).finished.then(this.logFinished)
-      // anime({
-      //   targets: randomItemSelector,
-      //   scale: [
-      //     {value: .1, easing: 'easeOutSine', duration: 500},
-      //     {value: 1, easing: 'easeInOutQuad', duration: 1200}
-      //   ],
-      //   delay: anime.stagger(100, {
-      //     grid: [randomItemSelector.list[0].length, randomItemSelector.list.length],
-      //     from: 'center'
-      //   }),
-      //   loop: true
-      // });
-    },
-    logFinished(anime) {
-      this.active = true;
-      console.log('finished', this.active, anime);
-      this.test();
-   },
-   test() {
-    const randomItemSelector = new Letterize({
+    const setLetters = {};
+    setLetters.opacityIn = [0, 1];
+    setLetters.scaleIn = [0.2, 1];
+    setLetters.scaleOut = 3;
+    setLetters.durationIn = 800;
+    setLetters.durationOut = 600;
+    setLetters.delay = 400;
+    const letterize = new Letterize({
       targets: '.random__item'
     });
-    anime({
-      targets: randomItemSelector,
-      scale: [
-        {value: .1, easing: 'easeOutSine', duration: 500},
-        {value: 1, easing: 'easeInOutQuad', duration: 1200}
-      ],
-      loop: true
+    let lettersTimeLine;
+    lettersTimeLine = anime.timeline({
+      loop: 1,
+      autoplay: false,
+      update: function() {
+        document.querySelector('.play').style.opacity = 0;
+        document.querySelector('.play').style.transform = 'translateY(-40px)';
+      },
+      loopComplete: function(anim) {
+        lettersTimeLine = anime.timeline({
+          targets: letterize.listAll,
+          delay: anime.stagger(100, {
+            grid: [letterize.list[0].length, letterize.list.length],
+            from: 'center'
+          }),
+          loop: 1,
+          changeComplete: function(anim) {
+            document.querySelector('.play').style.opacity = 1;
+            document.querySelector('.play').style.transform = 'translateY(0)';
+          },
+        }).add({
+          targets: '.random__item',
+          opacity: 1,
+          delay: anime.stagger(100, {
+            grid: [letterize.list[0].length, letterize.list.length],
+            from: 'center'
+          }),
+        })
+        .add({
+          scale: 0.8
+        })
+        .add({
+          letterSpacing: '9px'
+        })
+        .add({
+          scale: 1
+        })
+        .add({
+          letterSpacing: '6px'
+        })
+        .add({
+          targets: '.random__item',
+          opacity: 0,
+          delay: anime.stagger(100, {
+            grid: [letterize.list.length, letterize.list[0].length]
+          }),
+        }).finished.then(this.logFinished);
+      }
     });
+
+    lettersTimeLine
+    .add({
+      targets: '.letters-1',
+      opacity: setLetters.opacityIn,
+      scale: setLetters.scaleIn,
+      duration: setLetters.durationIn
+    }).add({
+      targets: '.letters-1',
+      opacity: 0,
+      scale: setLetters.scaleOut,
+      duration: setLetters.durationOut,
+      easing: 'easeInExpo',
+      delay: setLetters.delay
+    }).add({
+      targets: '.letters-2',
+      opacity: setLetters.opacityIn,
+      scale: setLetters.ScaleIn,
+      duration: setLetters.durationIn
+    }).add({
+      targets: '.letters-2',
+      opacity: 0,
+      scale: setLetters.scaleOut,
+      duration: setLetters.durationOut,
+      easing: 'easeInExpo',
+      delay: setLetters.delay
+    }).add({
+      targets: '.letters-3',
+      opacity: setLetters.opacityIn,
+      scale: setLetters.ScaleIn,
+      duration: setLetters.durationIn
+    }).add({
+      targets: '.letters-3',
+      opacity: 0,
+      scale: setLetters.scaleOut,
+      duration: setLetters.durationOut,
+      easing: 'easeInExpo',
+      delay: setLetters.delay
+    // }).finished.then(this.logFinished);
+    });
+
+    document.querySelector('.play').onclick = lettersTimeLine.play;
+  },
+  methods: {
+    logFinished() {
+      console.log('finished');
    },
     randomValues() {
       const values = this.randomValue;
@@ -216,9 +222,10 @@ export default {
 </script>
 <style lang="less">
   .random {
+    z-index: 1;
     box-sizing: border-box;
     position: relative;
-    padding: 5vh 0;
+    padding: 10vh 0;
     background-color: #222;
     font-family: "Khula", sans-serif;
     overflow: hidden;
@@ -238,7 +245,7 @@ export default {
       transform: translate(-50%, -50%);
       .letters {
         position: absolute;
-        top: -60px;
+        top: -50px;
         left: -60px;
         right: -60px;
         opacity: 0;
@@ -250,31 +257,30 @@ export default {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      width: 45vh;
       margin: 0 auto;
       text-align: center;
     }
     &__item {
       opacity: 0;
+      transition: opacity .6s ease-in;
       display: inline-flex;
       margin: 0;
       color: #fff;
-      font-size: 1vw;
+      font-size: 14px;
       letter-spacing: 6px;
       line-height: 1.2;
       text-align: center;
       text-transform: uppercase;
-      &.is-active {
-        opacity: 1;
-      }
     }
   }
   .controller {
     margin-top: 10px;
+    height: 27px;
     text-align: center;
     .button {
-      min-width: 90px;
-      padding: 5px;
+      transition: opacity .4s ease, transform .4s ease;
+      width: 90px;
+      padding: 5px 0;
       background: none;
       border: 1px solid #000;
       cursor: none;
