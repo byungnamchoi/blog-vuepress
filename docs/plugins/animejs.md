@@ -7,7 +7,7 @@ animejs + letterizejs 조합으로~<br>
 <div class="random">
   <h1 class="random__letters">
     <span
-      v-for="(item, index) in randomLetters"
+      v-for="(item, index) in letters"
       :key="index"
       :class="['letters', `letters-${index + 1}`]"
     >
@@ -16,7 +16,7 @@ animejs + letterizejs 조합으로~<br>
   </h1>
   <div class="random__group">
     <p
-      v-for="(item, index) in randomValue"
+      v-for="(item, index) in randomNumber"
       :key="index"
       class="random__item"
     >
@@ -44,7 +44,7 @@ export default {
     return {
       autoplay: false,
       active: false,
-      randomLetters: [
+      letters: [
         {
           letters: 'Ready'
         },
@@ -55,7 +55,7 @@ export default {
           letters: 'Go!'
         }
       ],
-      randomValue: [
+      randomNumber: [
         {
           value: '01 01 01 01 01 01 01 01 01 01'
         },
@@ -105,117 +105,125 @@ export default {
     }
   },
   mounted() {
-    const setLetters = {};
-    setLetters.opacityIn = [0, 1];
-    setLetters.scaleIn = [0.2, 1];
-    setLetters.scaleOut = 3;
-    setLetters.durationIn = 800;
-    setLetters.durationOut = 600;
-    setLetters.delay = 400;
-    const letterize = new Letterize({
-      targets: '.random__item'
-    });
-    let lettersTimeLine;
-    lettersTimeLine = anime.timeline({
-      loop: 1,
-      autoplay: false,
-      update: function() {
-        document.querySelector('.play').style.opacity = 0;
-        document.querySelector('.play').style.transform = 'translateY(-40px)';
-      },
-      loopComplete: function(anim) {
-        lettersTimeLine = anime.timeline({
-          targets: letterize.listAll,
-          delay: anime.stagger(100, {
-            grid: [letterize.list[0].length, letterize.list.length],
-            from: 'center'
-          }),
-          loop: 1,
-          changeComplete: function(anim) {
-            document.querySelector('.play').style.opacity = 1;
-            document.querySelector('.play').style.transform = 'translateY(0)';
-          },
-        }).add({
-          targets: '.random__item',
-          opacity: 1,
-          delay: anime.stagger(100, {
-            grid: [letterize.list[0].length, letterize.list.length],
-            from: 'center'
-          }),
-        })
-        .add({
-          scale: 0.8
-        })
-        .add({
-          letterSpacing: '9px'
-        })
-        .add({
-          scale: 1
-        })
-        .add({
-          letterSpacing: '6px'
-        })
-        .add({
-          targets: '.random__item',
-          opacity: 0,
-          delay: anime.stagger(100, {
-            grid: [letterize.list.length, letterize.list[0].length]
-          }),
-        }).finished.then(this.logFinished);
-      }
-    });
-
-    lettersTimeLine
-    .add({
-      targets: '.letters-1',
-      opacity: setLetters.opacityIn,
-      scale: setLetters.scaleIn,
-      duration: setLetters.durationIn
-    }).add({
-      targets: '.letters-1',
-      opacity: 0,
-      scale: setLetters.scaleOut,
-      duration: setLetters.durationOut,
-      easing: 'easeInExpo',
-      delay: setLetters.delay
-    }).add({
-      targets: '.letters-2',
-      opacity: setLetters.opacityIn,
-      scale: setLetters.ScaleIn,
-      duration: setLetters.durationIn
-    }).add({
-      targets: '.letters-2',
-      opacity: 0,
-      scale: setLetters.scaleOut,
-      duration: setLetters.durationOut,
-      easing: 'easeInExpo',
-      delay: setLetters.delay
-    }).add({
-      targets: '.letters-3',
-      opacity: setLetters.opacityIn,
-      scale: setLetters.ScaleIn,
-      duration: setLetters.durationIn
-    }).add({
-      targets: '.letters-3',
-      opacity: 0,
-      scale: setLetters.scaleOut,
-      duration: setLetters.durationOut,
-      easing: 'easeInExpo',
-      delay: setLetters.delay
-    // }).finished.then(this.logFinished);
-    });
-
-    document.querySelector('.play').onclick = lettersTimeLine.play;
+    this.randomValues();
+    this.randomAnime();
   },
   methods: {
-    logFinished() {
-      console.log('finished');
-   },
     randomValues() {
-      const values = this.randomValue;
-      values.forEach(e =>
-        e.value = values[Math.floor(Math.random() * values.length)].value
-      );
+      const values = this.randomNumber;
+      const valuesArray = [];
+      for (let i = 0; i < values.length; i++) {
+        let randomValues = Math.floor(Math.random() * values.length + 1)
+        if (valuesArray.indexOf(randomValues) === -1) {
+          valuesArray.push(randomValues)
+        } else {
+          i--
+        }
+        values[i].value = values[valuesArray[i]-1].value
+      }
+    },
+    randomAnime() {
+      const setLetters = {};
+      setLetters.opacityIn = [0, 1];
+      setLetters.scaleIn = [0.2, 1];
+      setLetters.scaleOut = 3;
+      setLetters.durationIn = 800;
+      setLetters.durationOut = 600;
+      setLetters.delay = 400;
+      let timeLine;
+      timeLine = anime.timeline({
+        loop: 1,
+        autoplay: false,
+        update: function() {
+          document.querySelector('.play').style.opacity = 0;
+          document.querySelector('.play').style.transform = 'translateY(-40px)';
+        },
+        loopComplete: function(anim) {
+          const letterize = new Letterize({
+            targets: '.random__item'
+          });
+          timeLine = anime.timeline({
+            targets: letterize.listAll,
+            delay: anime.stagger(100, {
+              grid: [letterize.list[0].length, letterize.list.length],
+              from: 'center'
+            }),
+            loop: 1,
+            complete: function(anim) {
+              document.querySelector('.play').style.opacity = 1;
+              document.querySelector('.play').style.transform = 'translateY(0)';
+              console.log('complete', '특정 값 노출');
+            }
+          }).add({
+            targets: '.random__item',
+            opacity: 1,
+            delay: anime.stagger(100, {
+              grid: [letterize.list[0].length, letterize.list.length],
+              from: 'center'
+            }),
+          })
+          .add({
+            scale: 0.8
+          })
+          .add({
+            letterSpacing: '9px'
+          })
+          .add({
+            scale: 1
+          })
+          .add({
+            letterSpacing: '6px'
+          })
+          .add({
+            targets: '.random__item',
+            opacity: 0,
+            delay: anime.stagger(100, {
+              grid: [letterize.list.length, letterize.list[0].length]
+            }),
+          });
+        }
+      });
+
+      timeLine
+      .add({
+        targets: '.letters-1',
+        opacity: setLetters.opacityIn,
+        scale: setLetters.scaleIn,
+        duration: setLetters.durationIn
+      }).add({
+        targets: '.letters-1',
+        opacity: 0,
+        scale: setLetters.scaleOut,
+        duration: setLetters.durationOut,
+        easing: 'easeInExpo',
+        delay: setLetters.delay
+      }).add({
+        targets: '.letters-2',
+        opacity: setLetters.opacityIn,
+        scale: setLetters.ScaleIn,
+        duration: setLetters.durationIn
+      }).add({
+        targets: '.letters-2',
+        opacity: 0,
+        scale: setLetters.scaleOut,
+        duration: setLetters.durationOut,
+        easing: 'easeInExpo',
+        delay: setLetters.delay
+      }).add({
+        targets: '.letters-3',
+        opacity: setLetters.opacityIn,
+        scale: setLetters.ScaleIn,
+        duration: setLetters.durationIn
+      }).add({
+        targets: '.letters-3',
+        opacity: 0,
+        scale: setLetters.scaleOut,
+        duration: setLetters.durationOut,
+        easing: 'easeInExpo',
+        delay: setLetters.delay
+      });
+
+      document.querySelector('.play').onclick = timeLine.play;
     }
   }
 }
