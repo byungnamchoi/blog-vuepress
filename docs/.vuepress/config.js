@@ -15,15 +15,21 @@ module.exports = {
       {text: 'HTML', link: '/html/'},
       {text: 'CSS', link: '/css/'},
       {text: 'Javascript', link: '/javascript/'},
+      {text: 'Issue', link: '/issue/'},
+      {text: 'VS Code', link: '/vscode/'},
       {
         text: 'Plugins',
         items: [
-          { text: 'ztextjs', link: '/plugins/ztextjs' },
-          { text: 'animejs', link: '/plugins/animejs' }
+          { text: 'ztextjs', link: '/plugins/ztextjs' }
         ]
       },
-      {text: 'Issue', link: '/issue/'},
-      {text: 'VS Code', link: '/vscode/'}
+      {
+        text: 'Etc',
+        items: [
+          { text: 'equipment', link: '/etc/equipment' },
+          { text: 'shuffle', link: '/etc/shuffle' }
+        ]
+      }
     ],
     sidebar: 'auto', // 사이드바 사용 여부. auto로 하면 content의 내용이 반영된다.
     smoothScroll: true // 부드러운 스크롤 사용 여부
