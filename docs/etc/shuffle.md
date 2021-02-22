@@ -20,10 +20,12 @@ animejs + letterizejs 조합으로~<br>
       :key="index"
       class="random__item"
     >
-      <!-- :class="['random__item', { 'is-active': active }]" -->
       {{ item.value }}
     </p>
   </div>
+  <p class="random__result">
+    {{ result }}
+  </p>
 </div>
 
 <div class="controller">
@@ -42,8 +44,7 @@ export default {
   name: 'random',
   data() {
     return {
-      autoplay: false,
-      active: false,
+      animeTimeline: null,
       letters: [
         {
           letters: 'Ready'
@@ -101,7 +102,8 @@ export default {
         {
           value: '15 15 15 15 15 15 15 15 15 15'
         }
-      ]
+      ],
+      result: '01'
     }
   },
   mounted() {
@@ -112,16 +114,27 @@ export default {
       const values = this.randomNumber;
       const valuesArray = [];
       for (let i = 0; i < values.length; i++) {
-        let randomValues = Math.floor(Math.random() * values.length + 1)
+        const randomValues = Math.floor(Math.random() * values.length)
         if (valuesArray.indexOf(randomValues) === -1) {
           valuesArray.push(randomValues)
         } else {
           i--
         }
-        values[i].value = values[valuesArray[i]-1].value
       }
+      const changeArray = values.map((e, i) => {
+        e = values[valuesArray[i]];
+        return e;
+      });
+      this.randomNumber = changeArray;
+
+      let resultVariable = Number(this.result = Math.floor(Math.random() * this.randomNumber.length) + 1).toString();
+      if (resultVariable < 10 && resultVariable.length == 1) {
+        resultVariable = '0' + resultVariable;
+        this.result = resultVariable;
+        return resultVariable;
+      }
+
       this.randomAnime();
-      return false;
     },
     randomAnime() {
       const setLetters = {};
@@ -131,19 +144,19 @@ export default {
       setLetters.durationIn = 800;
       setLetters.durationOut = 600;
       setLetters.delay = 400;
-      let timeLine;
-      timeLine = anime.timeline({
+      const playSelector = document.querySelector('.play');
+      this.animeTimeline = anime.timeline({
         loop: 1,
         autoplay: false,
         update: function() {
-          document.querySelector('.play').style.opacity = 0;
-          document.querySelector('.play').style.transform = 'translateY(-40px)';
+          playSelector.style.opacity = 0;
+          playSelector.style.transform = 'translateY(-40px)';
         },
         loopComplete: function(anim) {
           const letterize = new Letterize({
             targets: '.random__item'
           });
-          timeLine = anime.timeline({
+          this.animeTimeline = anime.timeline({
             targets: letterize.listAll,
             delay: anime.stagger(100, {
               grid: [letterize.list[0].length, letterize.list.length],
@@ -151,12 +164,28 @@ export default {
             }),
             loop: 1,
             complete: function(anim) {
-              document.querySelector('.play').style.opacity = 1;
-              document.querySelector('.play').style.transform = 'translateY(0)';
-              console.log('complete', '특정 값 노출');
+              // playSelector.style.opacity = 1;
+              // playSelector.style.transform = 'translateY(0)';
+              this.animeTimeline = anime.timeline({
+                targets: '.random__result',
+                opacity: 1
+              })
+              .add({
+                targets: '.random__result',
+                opacity: setLetters.opacityIn,
+                duration: setLetters.durationIn
+              }).add({
+                targets: '.random__result',
+                opacity: 0,
+                duration: setLetters.durationOut,
+                easing: 'easeInExpo',
+                delay: setLetters.delay
+              })
             }
           }).add({
             targets: '.random__item',
+            loop: 1,
+            autoplay: false,
             opacity: 1,
             delay: anime.stagger(100, {
               grid: [letterize.list[0].length, letterize.list.length],
@@ -185,7 +214,7 @@ export default {
         }
       });
 
-      timeLine
+      this.animeTimeline
       .add({
         targets: '.letters-1',
         opacity: setLetters.opacityIn,
@@ -224,7 +253,7 @@ export default {
         delay: setLetters.delay
       });
 
-      document.querySelector('.play').onclick = timeLine.play;
+      playSelector.onclick = this.animeTimeline.play;
     }
   }
 }
@@ -280,6 +309,18 @@ export default {
       line-height: 1.2;
       text-align: center;
       text-transform: uppercase;
+    }
+    &__result {
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      margin: 0;
+      color: #fff;
+      font-size: 4.5em;
+      text-align: center;
     }
   }
   .controller {
