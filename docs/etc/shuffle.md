@@ -113,6 +113,7 @@ export default {
     randomInit() {
       const values = this.randomNumber;
       const valuesArray = [];
+
       for (let i = 0; i < values.length; i++) {
         const randomValues = Math.floor(Math.random() * values.length)
         if (valuesArray.indexOf(randomValues) === -1) {
@@ -125,6 +126,7 @@ export default {
         e = values[valuesArray[i]];
         return e;
       });
+
       this.randomNumber = changeArray;
 
       let resultVariable = Number(this.result = Math.floor(Math.random() * this.randomNumber.length) + 1).toString();
@@ -137,14 +139,16 @@ export default {
       this.randomAnime();
     },
     randomAnime() {
-      const setLetters = {};
       const playSelector = document.querySelector('.play');
+
+      const setLetters = {};
       setLetters.opacityIn = [0, 1];
       setLetters.scaleIn = [0.2, 1];
       setLetters.scaleOut = 3;
       setLetters.durationIn = 800;
       setLetters.durationOut = 600;
       setLetters.delay = 400;
+
       let animeTimeline = anime.timeline({
         loop: 1,
         autoplay: false,
