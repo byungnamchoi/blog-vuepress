@@ -14,6 +14,7 @@ module.exports = {
       { text: 'Home', link: '/' },
       {text: 'HTML', link: '/html/'},
       {text: 'CSS', link: '/css/'},
+      {text: 'LESS', link: '/less/'},
       {text: 'Javascript', link: '/javascript/'},
       {text: 'Issue', link: '/issue/'},
       {text: 'VS Code', link: '/vscode/'},
