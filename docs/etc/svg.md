@@ -90,6 +90,27 @@
 
 ## svg+animejs
 <div class="animejs">
+  <div class="cash">
+    <div class="cash__group">
+      <ul class="cash__list">
+        <li class="cash__item">$</li>
+        <li class="cash__item">1%</li>
+        <li class="cash__item">$</li>
+        <li class="cash__item">1%</li>
+        <li class="cash__item">$</li>
+      </ul>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+      <g fill="none" fill-rule="evenodd">
+        <g stroke="#000" stroke-width="1.5">
+          <g transform="translate(-32 -208) translate(29 208) translate(3)">
+            <circle cx="25" cy="25" r="16.214"/>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
   <div class="coupon">
     <div class="coupon__group">
       <ul id="test" class="coupon__list">
@@ -169,12 +190,26 @@ import anime from 'animejs/lib/anime.es.js';
 export default {
   name: 'svg',
   mounted() {
+    this.cash();
     this.coupon();
     this.re();
     this.birth();
     this.tear();
   },
   methods: {
+    cash() {
+      const cashList = '.animejs .cash__list';
+      const cashItemsClone = (e) => {
+        const element = document.querySelector(e);
+        NodeList.prototype.forEach = Array.prototype.forEach;
+        const items = element.childNodes;
+        items.forEach((item) => {
+          let itemsClone = item.cloneNode(true);
+          element.appendChild(itemsClone);
+        });
+      };
+      cashItemsClone(cashList);
+    },
     coupon() {
       const couponList = '.animejs .coupon__list';
       const couponItemsClone = (e) => {
@@ -186,6 +221,7 @@ export default {
           element.appendChild(itemsClone);
         });
       };
+      couponItemsClone(couponList);
       // const couponPos = [
       //   { translateY: 0 },
       //   { translateY: -23 },
@@ -210,13 +246,12 @@ export default {
       //   { translateY: -460 },
       //   { translateY: -483 },
       // ];
-      couponItemsClone(couponList);
       // anime({
       //   targets: couponList,
       //   duration: 1500,
       //   loop: true,
       //   easing: 'cubicBezier(0, 0.63, 1, 1)',
-      //   endDelay: 2500,
+      //   endDelay: 2000,
       //   keyframes: couponPos,
       // });
     },
@@ -227,7 +262,7 @@ export default {
         duration: 1000,
         loop: true,
         easing: 'easeInExpo',
-        endDelay: 2500,
+        endDelay: 2000,
       });
     },
     birth() {
@@ -474,6 +509,53 @@ export default {
   }
 
   .animejs {
+    .cash {
+      display: inline-block;
+      position: relative;
+
+      &__group {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        overflow: hidden;
+      }
+
+      &__list {
+        animation: animejs-cash 4s cubic-bezier(0.6, 0.48, 0.59, 0.94) infinite;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        list-style: none;
+        user-select: none;
+      }
+
+      &__item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+
+        .cash-loop(10);
+        .cash-loop(@n, @i: 1) when (@i =< @n) {
+          &:nth-child(@{i}) {
+            transform: translateY(0px + ((@i - 1) * 30));
+          }
+          .cash-loop(@n, (@i + 1));
+        }
+      }
+    }
+
     .coupon {
       display: inline-block;
       position: relative;
@@ -513,90 +595,13 @@ export default {
         line-height: 21px;
         text-align: center;
 
-        &:nth-child(1) {
-          transform: translateY(0);
+        .coupon-loop(22);
+        .coupon-loop(@n, @i: 1) when (@i =< @n) {
+          &:nth-child(@{i}) {
+            transform: translateY(0px + ((@i - 1) * 23));
+          }
+          .coupon-loop(@n, (@i + 1));
         }
-        &:nth-child(2) {
-          transform: translateY(23px);
-        }
-        &:nth-child(3) {
-          transform: translateY(46px);
-        }
-        &:nth-child(4) {
-          transform: translateY(69px);
-        }
-        &:nth-child(5) {
-          transform: translateY(92px);
-        }
-        &:nth-child(6) {
-          transform: translateY(115px);
-        }
-        &:nth-child(7) {
-          transform: translateY(138px);
-        }
-        &:nth-child(8) {
-          transform: translateY(161px);
-        }
-        &:nth-child(9) {
-          transform: translateY(184px);
-        }
-        &:nth-child(10) {
-          transform: translateY(207px);
-        }
-        &:nth-child(11) {
-          transform: translateY(230px);
-        }
-        &:nth-child(12) {
-          transform: translateY(253px);
-        }
-        &:nth-child(13) {
-          transform: translateY(276px);
-        }
-        &:nth-child(14) {
-          transform: translateY(299px);
-        }
-        &:nth-child(15) {
-          transform: translateY(322px);
-        }
-        &:nth-child(16) {
-          transform: translateY(345px);
-        }
-        &:nth-child(17) {
-          transform: translateY(368px);
-        }
-        &:nth-child(18) {
-          transform: translateY(391px);
-        }
-        &:nth-child(19) {
-          transform: translateY(414px);
-        }
-        &:nth-child(20) {
-          transform: translateY(437px);
-        }
-        &:nth-child(21) {
-          transform: translateY(460px);
-        }
-        &:nth-child(22) {
-          transform: translateY(483px);
-        }
-      }
-    }
-
-    @keyframes animejs-coupon {
-      0%, 45% {
-        transform: translateY(0);
-      }
-      70%{
-        transform: translateY(-458px);
-      }
-      80%{
-        transform: translateY(-468px);
-      }
-      90%{
-        transform: translateY(-478px);
-      }
-      100% {
-        transform: translateY(-483px);
       }
     }
 
@@ -607,6 +612,39 @@ export default {
       justify-content: center;
       width: 50px;
       height: 50px;
+    }
+
+    @keyframes animejs-cash {
+      0%, 25% {
+        transform: translateY(0);
+      }
+      70% {
+        transform: translateY(-240px);
+      }
+      90% {
+        transform: translateY(-265px);
+      }
+      100% {
+        transform: translateY(-270px);
+      }
+    }
+
+    @keyframes animejs-coupon {
+      0%, 45% {
+        transform: translateY(0);
+      }
+      70%{
+        transform: translateY(-448px);
+      }
+      80%{
+        transform: translateY(-468px);
+      }
+      90%{
+        transform: translateY(-478px);
+      }
+      100% {
+        transform: translateY(-483px);
+      }
     }
   }
 </style>
