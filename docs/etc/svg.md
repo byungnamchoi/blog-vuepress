@@ -113,7 +113,7 @@
 
   <div class="coupon">
     <div class="coupon__group">
-      <ul id="test" class="coupon__list">
+      <ul class="coupon__list">
         <li class="coupon__item">%</li>
         <li class="coupon__item">2</li>
         <li class="coupon__item">3</li>
@@ -163,9 +163,9 @@
       </g>
       <g class="icon-birth" transform="translate(-278 -208) translate(275 208) translate(3) translate(18.284 5.804)">
         <path stroke="#000" stroke-width="1.5" d="M1.433 12.817L1.433 7.154M7.163 12.817L7.163 4.292M12.893 12.817L12.893 7.154"/>
-        <ellipse class="icon-birth-1" cx="1.433" cy="4.292" fill="#000" rx="1.433" ry="1.431" transform="matrix(1 0 0 -1 0 8.585)"/>
-        <ellipse class="icon-birth-2" cx="7.163" cy="1.431" fill="#000" rx="1.433" ry="1.431" transform="matrix(1 0 0 -1 0 2.862)"/>
-        <ellipse class="icon-birth-1" cx="12.893" cy="4.292" fill="#000" rx="1.433" ry="1.431" transform="matrix(1 0 0 -1 0 8.585)"/>
+        <ellipse cx="1.433" cy="4.292" fill="#000" rx="1.433" ry="1.431" transform="matrix(1 0 0 -1 0 8.585)"/>
+        <ellipse cx="7.163" cy="1.431" fill="#000" rx="1.433" ry="1.431" transform="matrix(1 0 0 -1 0 2.862)"/>
+        <ellipse cx="12.893" cy="4.292" fill="#000" rx="1.433" ry="1.431" transform="matrix(1 0 0 -1 0 8.585)"/>
       </g>
     </g>
   </svg>
@@ -201,9 +201,8 @@ export default {
       const cashList = '.animejs .cash__list';
       const cashItemsClone = (e) => {
         const element = document.querySelector(e);
-        NodeList.prototype.forEach = Array.prototype.forEach;
         const items = element.childNodes;
-        items.forEach((item) => {
+        Array.prototype.forEach.call(items, (item) => {
           let itemsClone = item.cloneNode(true);
           element.appendChild(itemsClone);
         });
@@ -214,9 +213,8 @@ export default {
       const couponList = '.animejs .coupon__list';
       const couponItemsClone = (e) => {
         const element = document.querySelector(e);
-        NodeList.prototype.forEach = Array.prototype.forEach;
         const items = element.childNodes;
-        items.forEach((item) => {
+        Array.prototype.forEach.call(items, (item) => {
           let itemsClone = item.cloneNode(true);
           element.appendChild(itemsClone);
         });
@@ -268,8 +266,8 @@ export default {
     birth() {
       anime({
         targets: '.animejs .icon-birth ellipse',
-        cy: (i) => {
-          return Number(i.cy.animVal.valueAsString) + 1;
+        cy: (e) => {
+          return Number(e.cy.animVal.valueAsString) + 1;
         },
         duration: 100,
         loop: true,
