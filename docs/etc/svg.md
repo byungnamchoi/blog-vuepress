@@ -151,6 +151,22 @@
   </g>
 </svg>
 
+<br><br>
+<div class="badge">
+  <div class="badge__back">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 90 90">
+      <circle class="badge__circle" cx="45" cy="45" r="45" fill="#000000"/>
+      <text x="20" y="35" fill="#ffffff">Back</text>
+    </svg>
+  </div>
+  <div class="badge__front">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 90 90">
+      <circle class="badge__circle" cx="45" cy="45" r="45" fill="#ff0000"/>
+      <text x="20" y="35" fill="#ffffff">Front</text>
+    </svg>
+  </div>
+</div>
+
 **참고 자료(References)**
 * <https://animejs.com/>
 
@@ -165,6 +181,7 @@ export default {
     this.shoppingbag();
     this.orderComplete();
     this.noResults();
+    this.badge();
   },
   methods: {
     signupRe() {
@@ -261,6 +278,26 @@ export default {
         loop: true,
         easing: 'easeInOutBack',
       });
+    },
+    badge() {
+      anime.timeline({
+        loop: true,
+        duration: 1500,
+        easing: 'easeOutExpo',
+        targets: '.badge',
+      })
+      // .add({
+      //   targets: '.badge',
+      //   scale: [.7, 1]
+      // })
+      // .add({
+      //   targets: '.badge',
+      //   rotateY: ['0deg', '540deg'],
+      // })
+      // .add({
+      //   targets: '.badge__circle',
+      //   fill: '#000000',
+      // }, '-=1000')
     },
   }
 }
@@ -395,6 +432,38 @@ export default {
   .shoppingbag {
     display: inline-block;
     transform-origin: top;
+  }
+
+  .badge {
+    display:inline-block;
+    position: relative;
+    transform-origin: center;
+    width: 60px;
+    height: 60px;
+    transition: all .6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+        perspective: 150rem;
+    perspective-origin: 50% calc(50% - 18em);
+
+    &:hover {
+      .badge__front {
+        transform: rotateY(-180deg);
+      }
+      .badge__back {
+        transform: rotateY(0deg);
+      }
+    }
+
+    &__front,
+    &__back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+    transition: all .6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+    }
+    &__back {
+      transform: rotateY(-180deg);
+    }
   }
 
   @keyframes anime-signup-cash {
