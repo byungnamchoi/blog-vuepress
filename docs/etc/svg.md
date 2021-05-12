@@ -1,6 +1,6 @@
 # svg
 
-## 최종 (svg+animejs+css)
+## svg+animejs+css
 <div class="signup-cash">
   <div class="signup-cash__group">
     <ul class="signup-cash__list">
@@ -270,6 +270,11 @@ export default {
     display: inline-block;
     position: relative;
 
+    svg {
+      z-index: 1;
+      position: relative;
+    }
+
     &__group {
       position: absolute;
       top: 10px;
@@ -317,6 +322,11 @@ export default {
     display: inline-block;
     position: relative;
 
+    svg {
+      z-index: 1;
+      position: relative;
+    }
+
     &__group {
       position: absolute;
       top: 14px;
@@ -349,7 +359,7 @@ export default {
       color: #000;
       font-size: 18px;
       font-family: Gotham-Medium, Gotham;
-      line-height: 21px;
+      line-height: 1;
       text-align: center;
 
       .signup-coupon-loop(21);
