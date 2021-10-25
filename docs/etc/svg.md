@@ -167,11 +167,17 @@
   </div>
 </div>
 
+<br><br><br>
+<div id="bouncyCircle"></div>
+
 **참고 자료(References)**
 * <https://animejs.com/>
 
 <script>
 import anime from 'animejs/lib/anime.es.js';
+// import mojs from '@mojs/core';
+import { SVG } from '@svgdotjs/svg.js';
+
 export default {
   name: 'svg',
   mounted() {
@@ -182,6 +188,7 @@ export default {
     this.orderComplete();
     this.noResults();
     this.badge();
+    this.svgJs();
   },
   methods: {
     signupRe() {
@@ -280,7 +287,7 @@ export default {
       });
     },
     badge() {
-      anime.timeline({
+      let tl = anime.timeline({
         loop: false,
         duration: 1500,
         easing: 'easeOutQuint',
@@ -302,6 +309,16 @@ export default {
         targets: '.badge__back',
         rotateY: 0,
       }, '-=1000')
+    },
+    svgJs() {
+      const draw = SVG().addTo('body').size('100%', '1000px');
+      const rect = draw.rect(100, 100).fill('#f06').move(400, 50);
+      rect.animate({
+        duration: 2000,
+        delay: 1000,
+        when: 'now',
+        wait: 200
+      }).attr({ fill: '#f01' }).animate({delay: 200}).size(50, 50).dmove(200,50).animate(3000).rotate(365).loop();
     },
   }
 }
@@ -457,6 +474,11 @@ export default {
     &__back {
       transform: rotateY(-180deg);
     }
+  }
+
+  .drawing {
+    width: 500px;
+    height: 500px;
   }
 
   @keyframes anime-signup-cash {
