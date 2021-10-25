@@ -27,7 +27,7 @@ module.exports = {
       {
         text: 'Etc',
         items: [
-          { text: 'equipment', link: '/etc/equipment' },
+          { text: 'test', link: '/etc/test' },
           { text: 'shuffle', link: '/etc/shuffle' },
           { text: 'svg', link: '/etc/svg' },
         ]
