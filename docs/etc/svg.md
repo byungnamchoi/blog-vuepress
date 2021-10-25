@@ -151,11 +151,33 @@
   </g>
 </svg>
 
+<br><br><br>
+<div class="badge">
+  <div class="badge__back">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 90 90">
+      <circle class="badge__circle" cx="45" cy="45" r="45" fill="#000000"/>
+      <text x="20" y="35" fill="#ffffff">Back</text>
+    </svg>
+  </div>
+  <div class="badge__front">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 90 90">
+      <circle class="badge__circle" cx="45" cy="45" r="45" fill="#ff0000"/>
+      <text x="20" y="35" fill="#ffffff">Front</text>
+    </svg>
+  </div>
+</div>
+
+<br><br><br>
+<div id="bouncyCircle"></div>
+
 **참고 자료(References)**
 * <https://animejs.com/>
 
 <script>
 import anime from 'animejs/lib/anime.es.js';
+// import mojs from '@mojs/core';
+import { SVG } from '@svgdotjs/svg.js';
+
 export default {
   name: 'svg',
   mounted() {
@@ -165,6 +187,8 @@ export default {
     this.shoppingbag();
     this.orderComplete();
     this.noResults();
+    this.badge();
+    this.svgJs();
   },
   methods: {
     signupRe() {
@@ -261,6 +285,40 @@ export default {
         loop: true,
         easing: 'easeInOutBack',
       });
+    },
+    badge() {
+      let tl = anime.timeline({
+        loop: false,
+        duration: 1500,
+        easing: 'easeOutQuint',
+        targets: '.badge',
+      })
+      .add({
+        targets: '.badge',
+        scale: [.2, 1]
+      })
+      .add({
+        targets: '.badge',
+        rotateY: 720,
+      })
+      .add({
+        targets: '.badge__front',
+        opacity: 0,
+      }, '-=2700')
+      .add({
+        targets: '.badge__back',
+        rotateY: 0,
+      }, '-=1000')
+    },
+    svgJs() {
+      const draw = SVG().addTo('body').size('100%', '1000px');
+      const rect = draw.rect(100, 100).fill('#f06').move(400, 50);
+      rect.animate({
+        duration: 2000,
+        delay: 1000,
+        when: 'now',
+        wait: 200
+      }).attr({ fill: '#f01' }).animate({delay: 200}).size(50, 50).dmove(200,50).animate(3000).rotate(365).loop();
     },
   }
 }
@@ -395,6 +453,32 @@ export default {
   .shoppingbag {
     display: inline-block;
     transform-origin: top;
+  }
+
+  .badge {
+    display:inline-block;
+    position: relative;
+    transform-origin: center;
+    width: 60px;
+    height: 60px;
+    perspective: 150rem;
+
+    &__front,
+    &__back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      transition: all .6s cubic-bezier(0.8, -0.4, 0.2, 1.7);
+    }
+    &__back {
+      transform: rotateY(-180deg);
+    }
+  }
+
+  .drawing {
+    width: 500px;
+    height: 500px;
   }
 
   @keyframes anime-signup-cash {
