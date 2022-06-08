@@ -1,5 +1,4 @@
-# (현재 진행중)
-VuePress + Github Action
+# VuePress + Github Action
 
 <script>
 export default {
