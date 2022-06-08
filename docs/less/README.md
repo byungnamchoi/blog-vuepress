@@ -111,6 +111,34 @@ functions.add("fonts", (path, fileName, formats) => {
 });
 ```
 
+## 뷰포트 최소/최대 너비에 대한 clamp() 값 생성기
+* <a href="https://min-max-calculator.9elements.com" target="_blank">https://min-max-calculator.9elements.com</a>
+* <a href="https://codepen.io/dowonkang/pen/QWQOyjx?editors=0011" target="_blank">https://codepen.io/dowonkang/pen/QWQOyjx?editors=0011</a>
+```
+// see https://min-max-calculator.9elements.com/
+// extracted from https://github.com/9elements/min-max-calculator/blob/main/src/components/Calculator/Calculator.svelte
+
+const pxToRem = (value) => (value / 16).toFixed(3);
+
+function calc({ minValue, maxValue, minViewport, maxViewport }) {
+  const variablePart = (maxValue - minValue) / (maxViewport - minViewport);
+  const constant = parseFloat((maxValue - maxViewport * variablePart) / 16).toFixed(3);
+  const minRem = `${pxToRem(minValue)}rem`;
+  const maxRem = `${pxToRem(maxValue)}rem`;
+  const value = `${constant}rem + ${parseFloat((100 * variablePart).toFixed(2))}vw`;
+  return `clamp(${minRem},${value},${maxRem})`;
+}
+
+console.log(calc({
+  minValue: 16,
+  maxValue: 24,
+  minViewport: 320,
+  maxViewport: 1200
+}));
+```
+
+## aspect-ratios
+* <a href="https://codepen.io/enbee81/pen/OJzoQZa" target="_blank">https://codepen.io/enbee81/pen/OJzoQZa</a>
 
 <script>
 export default {

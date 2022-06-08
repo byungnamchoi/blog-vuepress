@@ -30,6 +30,7 @@ module.exports = {
           { text: 'test', link: '/etc/test' },
           { text: 'shuffle', link: '/etc/shuffle' },
           { text: 'svg', link: '/etc/svg' },
+          { text: 'requestAnimationFrame', link: '/etc/request-animation-frame' },
         ]
       }
     ],

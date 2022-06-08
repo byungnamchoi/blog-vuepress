@@ -499,3 +499,77 @@ background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vc
 </style>
 
 ## scroll-snap-type
+
+## hover effect
+<div class="hover-group">
+  <p class="hover hover-1">1. Hover Me</p>
+  <p class="hover hover-2">2. Hover Me</p>
+  <p class="hover hover-3">3. Hover Me</p>
+  <p class="hover hover-4">4. Hover Me</p>
+</div>
+<style lang="less">
+  .hover-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+  .hover {
+    display: inline-block;
+    font-family: system-ui, sans-serif;
+    font-size: 3rem;
+    margin:0;
+    cursor: pointer;
+    padding: 0 .07em;
+  }
+  .hover-1 {
+    background: linear-gradient(#1095c1 0 0) var(--p,0)/var(--p,0) no-repeat;
+    transition: .4s,background-position 0s;
+  }
+  .hover-1:hover {
+    --p: 100%;
+    color: #fff;
+  }
+  .hover-2 {
+    background: 
+      linear-gradient(#1095c1 0 0) no-repeat
+      calc(200% - var(--p,0%)) 100% / 200% var(--p,.08em);
+    transition: .3s var(--t,0s), background-position .3s calc(.3s - var(--t,0s));
+  }
+  .hover-2:hover {
+    --p: 100%;
+    --t: .3s;
+    color: #fff;
+  }
+  .hover-3 {
+    --c: no-repeat linear-gradient(#1095c1 0 0);
+    background: 
+      var(--c)  calc(-101% + var(--p,0%)) 100%,
+      var(--c)  calc( 201% - var(--p,0%)) 0;
+    background-size: 50.1% var(--p,.08em);
+    transition: .3s var(--t,0s), background-position .3s calc(.3s - var(--t,0s));
+  }
+  .hover-3:hover {
+    --p: 101%;
+    --t: 0.3s;
+    color: #fff;
+  }
+  .hover-4 {
+    --c: #1095c1;
+    line-height: 1.2em;
+    background:
+      conic-gradient(from -135deg at 100%  50%,var(--c) 90deg,#0000 0) 0    var(--p,0%),
+      conic-gradient(from -135deg at 1.2em 50%,#0000 90deg,var(--c) 0) 100% var(--p,0%);
+    background-size: var(--s,0%) 200%;
+    background-repeat: no-repeat;
+    transition: .4s ease-in, background-position 0s;
+  }
+  .hover-4:hover {
+    --p: 100%;
+    --s: calc(50% + .61em); /* it should be 0.6em(1.2em/2) but we use a litte bigger */
+    color: #fff;
+  }
+</style>
+
+**참고 자료(References)**
+* <https://css-tricks.com/cool-hover-effects-using-background-properties/>
