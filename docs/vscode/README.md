@@ -31,7 +31,7 @@ VS 코드 사용자 스니펫은 File > Preferences > User Snippets(맥: Code > 
   "X Box <img />": {
     "prefix": ["ximg", "x-img"],
     "body": [
-      "<img $0src=\"data:image/svg+xml,%3Csvg fill='${3:gray}' viewBox='0 0 ${1:16} ${2:9}' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='${4:black}' stroke-width='2' d='M0 0h$1v$2H0z' vector-effect='non-scaling-stroke'/%3E%3Cpath stroke='$4' d='M0 0l$1 $2M$1 0L0 $2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E\" alt=\"\" />"
+      "<img $0src=\"data:image/svg+xml,%3Csvg fill='${3:silver}' viewBox='0 0 ${1:16} ${2:9}' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='${4:black}' stroke-width='2' d='M0 0h$1v$2H0z' vector-effect='non-scaling-stroke'/%3E%3Cpath stroke='$4' d='M0 0l$1 $2M$1 0L0 $2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E\" alt=\"\" width=\"$1\" height=\"$2\" />"
     ],
     "description": "A Mockup Image Placeholder"
   }
