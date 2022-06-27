@@ -256,7 +256,7 @@ export default {
 **참고 자료(References)**
 * <https://developer.mozilla.org/ko/docs/Web/CSS/object-fit>
 
-## svg
+## SVG
 
 SVG는 확장 가능한 벡터 그래픽(Scalable Vector Graphics)을 말합니다.<br>
 2차원 그래픽을 표현하기 위해 만들어진 XML파일 형식의 마크업 언어인데요.<br>
