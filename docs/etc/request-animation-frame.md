@@ -1,6 +1,6 @@
 <canvas id="lightpass" width="1158" height="770"></canvas>
 
-<style>
+<style scoped>
 html {
   height: 100vh;
 }
