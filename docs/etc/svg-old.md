@@ -355,7 +355,7 @@ export default {
 
       &__list {
         animation: anime-coupon 3s cubic-bezier(0, 0.63, 1, 1) infinite;
-        transform-style: preserve-3d;
+        /* transform-style: preserve-3d; */
         position: absolute;
         top: 0;
         left: 0;
