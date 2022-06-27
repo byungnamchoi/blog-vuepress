@@ -121,7 +121,7 @@ export default {
     position: relative;
     width: 200px;
     height: 200px;
-    /* transform-style: preserve-3d; */
+    transform-style: preserve-3d;
 
     &.animated {
       animation: cubeRotate 10s linear infinite;
